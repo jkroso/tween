@@ -29,18 +29,19 @@
   Ball.prototype.draw = function(ctx){
     ctx.save();
     ctx.fillStyle = 'red';
-    ctx.arc(this.x | 0, this.y | 0, this.rad, 0, Math.PI * 2, false);
+    ctx.arc(this.x, this.y, this.rad, 0, Math.PI * 2, false);
     ctx.fill();
     ctx.restore();
   };
 
   var ball = new Ball(100, 100);
   ball.draw(ctx);
+  var tween
 
   canvas.onclick = function(e){
     console.log('move');
 
-    var tween = Tween({ x: ball.x, y: ball.y })
+    tween = Tween({ x: ball.x, y: ball.y })
       .ease('out-bounce')
       .to({ x: e.offsetX, y: e.offsetY })
       .duration(1500);
@@ -50,13 +51,13 @@
       ball.moveTo(o.x, o.y);
       ball.draw(ctx);
     });
-
-    function animate() {
-      raf(animate);
-      tween.update();
-    }
-
-    animate();
   };
+  
+  function animate() {
+    raf(animate);
+    tween && tween.update();
+  }
+
+  animate();
 
 </script>
