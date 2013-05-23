@@ -22,8 +22,6 @@ module.exports = Tween;
 function Tween(obj) {
   if (!(this instanceof Tween)) return new Tween(obj);
   this._from = obj;
-  this.ease('linear');
-  this.duration(500);
 }
 
 /**
@@ -31,6 +29,13 @@ function Tween(obj) {
  */
 
 Emitter(Tween.prototype);
+
+/**
+ * default settings
+ */
+
+Tween.prototype._ease = ease.linear
+Tween.prototype._duration = 500
 
 /**
  * Reset the tween.
@@ -41,8 +46,8 @@ Emitter(Tween.prototype);
 Tween.prototype.reset = function(){
   this.isArray = Array.isArray(this._from);
   this._curr = clone(this._from);
-  this._done = false;
-  this._start = Date.now();
+  this._start = now();
+  delete this.step;
   return this;
 };
 
@@ -87,7 +92,7 @@ Tween.prototype.duration = function(ms){
  */
 
 Tween.prototype.ease = function(fn){
-  fn = 'function' == typeof fn ? fn : ease[fn];
+  fn = typeof fn == 'function' ? fn : ease[fn];
   if (!fn) throw new TypeError('invalid easing function');
   this._ease = fn;
   return this;
@@ -101,44 +106,34 @@ Tween.prototype.ease = function(fn){
  */
 
 Tween.prototype.step = function(){
-  if (this._done) return;
-
   // duration
   var duration = this._duration;
-  var end = this._end;
-  var now = Date.now();
-  var delta = now - this._start;
-  var done = delta >= duration;
+  var elapsed = now() - this._start
 
   // complete
-  if (done) {
-    this._from = this._curr;
-    this._done = true;
+  if (elapsed >= duration) {
+    this._from = this._to;
+    this._update(this._to)
+    this.step = function(){}
     this.emit('end')
-    return;
+    return this
   }
 
   // tween
   var from = this._from;
   var to = this._to;
   var curr = this._curr;
-  var fn = this._ease;
-  var p = (now - this._start) / duration;
-  var n = fn(p);
+  var n = this._ease(elapsed / duration);
 
-  // array
   if (this.isArray) {
-    for (var i = 0; i < from.length; ++i) {
-      curr[i] = from[i] + (to[i] - from[i]) * n;
+    var k = to.length
+    while (k--) {
+      curr[k] = from[k] + (to[k] - from[k]) * n;
     }
-
-    this._update(curr);
-    return this;
-  }
-
-  // objech
-  for (var k in from) {
-    curr[k] = from[k] + (to[k] - from[k]) * n;
+  } else {
+    for (var k in to) {
+      curr[k] = from[k] + (to[k] - from[k]) * n;
+    }
   }
 
   this._update(curr);
@@ -156,7 +151,7 @@ Tween.prototype.step = function(){
  */
 
 Tween.prototype.update = function(fn){
-  if (0 == arguments.length) return this.step();
+  if (!fn) return this.step();
   this._update = fn;
   return this;
 };
@@ -173,3 +168,17 @@ function clone(obj) {
   for (var key in obj) ret[key] = obj[key];
   return ret;
 }
+
+/**
+ * Get a timestamp
+ * 
+ * @return {Number}
+ * @api private
+ */
+
+var now = function(){
+  return performance.now()
+}
+
+// fallback
+if (!function(){return this}().performance) now = Date.now
