@@ -36,28 +36,21 @@
 
   var ball = new Ball(100, 100);
   ball.draw(ctx);
-  var tween
+  var tween = Tween({ x: ball.x, y: ball.y })
+    .ease('out-bounce')
+    .duration(1500);
 
   canvas.onclick = function(e){
-    console.log('move');
-
-    tween = Tween({ x: ball.x, y: ball.y })
-      .ease('out-bounce')
-      .to({ x: e.offsetX, y: e.offsetY })
-      .duration(1500);
-
-    tween.update(function(o){
-      canvas.width = canvas.width;
-      ball.moveTo(o.x, o.y);
-      ball.draw(ctx);
-    });
+    console.log('move x:%d, y:%d', e.offsetX, e.offsetY);
+    tween.to({ x: e.offsetX, y: e.offsetY });
+    animate()
   };
   
   function animate() {
-    raf(animate);
-    tween && tween.update();
+    var o = tween.next();
+    canvas.width = canvas.width;
+    ball.moveTo(o.x, o.y);
+    ball.draw(ctx);
+    if (!tween.done) raf(animate);
   }
-
-  animate();
-
 </script>
