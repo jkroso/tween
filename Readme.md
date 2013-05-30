@@ -59,7 +59,8 @@ animate();
 
 ### Tween.to(obj:Object|Array)
 
-  set target value
+  set target value. if `.to()` has been called before
+  `_from` will be updated to the current frame
 
 ```js
  tween.to({ x: 50, y: 100 })

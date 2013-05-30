@@ -49,7 +49,8 @@ Tween.prototype.reset = function(){
 }
 
 /**
- * set target value
+ * set target value. if `.to()` has been called before
+ * `_from` will be updated to the current frame
  *
  *    tween.to({ x: 50, y: 100 })
  *
