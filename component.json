@@ -7,7 +7,10 @@
   "dependencies": {
     "jkroso/emitter": "0.7.0",
     "jkroso/now": "0.1.1",
-    "component/ease": "1.0.0"
+    "jkroso/clone": "0.2.1",
+    "jkroso/type": "1.0.1",
+    "component/ease": "1.0.0",
+    "component/inherit": "0.0.2"
   },
   "development": {
     "component/raf": "*",
@@ -15,6 +18,9 @@
   },
   "license": "MIT",
   "scripts": [
-    "index.js"
+    "index.js",
+    "array.js",
+    "tween.js",
+    "object.js"
   ]
 }
