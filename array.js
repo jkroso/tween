@@ -25,6 +25,6 @@ ArrayTween.prototype.frame = function(p){
 ArrayTween.prototype.reset = function(){
   this._curr = this._from.slice()
   this._start = now()
-  this.next = Tween.prototype.next
+  this.done = false
   return this
 }

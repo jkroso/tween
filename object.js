@@ -26,6 +26,6 @@ ObjectTween.prototype.reset = function(){
   var copy = this._curr = {}
   for (var k in from) copy[k] = from[k]
   this._start = now()
-  this.next = Tween.prototype.next
+  this.done = false
   return this
 }

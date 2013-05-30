@@ -18,6 +18,6 @@ NumberTween.prototype.frame = function(p){
 NumberTween.prototype.reset = function(){
   this._start = now()
   this._diff = (this._to || 0) - this._from
-  this.next = Tween.prototype.next
+  this.done = false
   return this
 }

@@ -22,23 +22,41 @@ describe('tween', function () {
 })
 
 describe('object', function(){
-  it('should work', function(done){
+  it('should work', function(){
     var start = now()
     var t = tween({ x: 1 })
       .ease('linear')
       .to({ x: 10 })
       .duration(10)
-      .on('end', function(){
-        (now() - start).should.be.within(10, 40)
-        done()
-      })
+      while (!t.done) {
+        var o = t.next();
+        o.should.have.property('x').and.be.within(1, 10)
+      }
+      (now() - start).should.be.within(10, 15)
+      o.should.eql({ x:10 })
+  })
 
-    t.update(function(o){
-      o.should.have.property('x').and.be.within(1, 10)
-      tick(function(){
-        t.update()
-      })
-    }).update()
+  describe('.to()', function(){
+    it('should reset and move `_from`', function(){
+      var start = now()
+      var t = tween({ x: 1 })
+        .ease('linear')
+        .to({ x: 10 })
+        .duration(5)
+
+      while (!t.done) {
+        var o = t.next()
+        o.should.have.property('x').and.be.within(1, 10)
+      }
+      o.should.eql({x:10})
+      t.to({ x: 1}).duration(10)
+      while (!t.done) {
+        var o = t.next()
+        o.should.have.property('x').and.be.within(1, 10)
+      }
+      o.should.eql({ x: 1 });
+      (now() - start).should.be.within(15, 25)
+    })
   })
 })
 

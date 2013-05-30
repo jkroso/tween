@@ -59,6 +59,7 @@ Tween.prototype.reset = function(){
  */
 
 Tween.prototype.to = function(obj){
+  if ('_to' in this) this._from = this._curr || this.next()
   this._to = obj
   this.reset()
   return this
