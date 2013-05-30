@@ -11,15 +11,6 @@ function ObjectTween(obj){
 
 inherit(ObjectTween, Tween)
 
-/**
- * generate a tween frame at point `p` between 
- * `this._from` and `this._to`
- * 
- * @param {Number} percentage
- * @return {Array}
- * @api private
- */
-
 ObjectTween.prototype.frame = function(p){
   var from = this._from
   var to = this._to
@@ -29,12 +20,6 @@ ObjectTween.prototype.frame = function(p){
   }
   return curr
 }
-
-/**
- * Reset the tween.
- *
- * @api public
- */
 
 ObjectTween.prototype.reset = function(){
   var from = this._from

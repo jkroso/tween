@@ -130,3 +130,16 @@ Tween.prototype.update = function(fn){
   }
   return this
 }
+
+/**
+ * generate a tween frame at point `p` between 
+ * `this._from` and `this._to`
+ * 
+ * @param {Number} percent
+ * @return {x}
+ * @api public
+ */
+
+Tween.prototype.frame = function(percent){
+  throw new Error('should be shadowed by a sub-class')
+}

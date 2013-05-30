@@ -9,6 +9,7 @@ build: components index.js
 	@component build --dev
 
 components: component.json
+	@touch components
 	@component install --dev
 
 clean:

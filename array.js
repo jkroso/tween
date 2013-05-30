@@ -11,15 +11,6 @@ function ArrayTween(array){
 
 inherit(ArrayTween, Tween)
 
-/**
- * generate a tween frame at point `p` between 
- * `this._from` and `this._to`
- * 
- * @param {Number} percentage
- * @return {Array}
- * @api private
- */
-
 ArrayTween.prototype.frame = function(p){
   var from = this._from
   var to = this._to
@@ -30,12 +21,6 @@ ArrayTween.prototype.frame = function(p){
   }
   return curr
 }
-
-/**
- * Reset the tween.
- *
- * @api public
- */
 
 ArrayTween.prototype.reset = function(){
   this._curr = this._from.slice()

@@ -11,23 +11,9 @@ function NumberTween(n){
 
 inherit(NumberTween, Tween)
 
-/**
- * generate a tween frame at point `p` between 
- * `this._from` and `this._to`
- * 
- * @param {Number} percentage
- * @return {Number}
- * @api public
- */
-
 NumberTween.prototype.frame = function(p){
   return this._from + this._diff * p
 }
-
-/**
- * Reset the tween.
- * @api public
- */
 
 NumberTween.prototype.reset = function(){
   this._start = now()
