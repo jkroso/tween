@@ -7,7 +7,7 @@
 
 <script src="../build/build.js"></script>
 
-<canvas width=1000 height=500></canvas>
+<canvas width=10000 height=500></canvas>
 
 <script>
 	var Tween = require('tween');
@@ -22,26 +22,19 @@
 		return arr;
 	}
 
-	var tween = Tween(random(1000, 50))
+	var tween = Tween(random(10000, 50))
 		.ease('out-bounce')
-		.to(random(1000, 400))
+		.to(random(10000, 400))
 		.duration(800);
 
-	tween.update(function(a){
+	function animate() {
 		canvas.width = canvas.width;
 		ctx.fillStyle = '#0070ff';
+		var a = tween.next();
 		for (var i = 0; i < a.length; i++) {
 		  ctx.fillRect(i, h - a[i], 1, a[i]);
 		}
-	});
-
-	tween.on('end', function(){
-		animate = function(){};
-	});
-
-	function animate() {
-		raf(animate);
-		tween.update();
+		if (!tween.done) raf(animate);
 	}
 
 	animate();
