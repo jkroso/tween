@@ -1,41 +1,26 @@
 
-var Tween = require('../')
-
-function random(n) {
-	var arr = [];
-	while (n--) arr.push(Math.random() * 100);
-	return arr;
-}
-
-var from = random(20)
+var Tween = require('../array')
 
 var total = 100
 var frames = 0
 var i = 0
 var duration = 50
 
-function next(){
-	if (i++ === total) return log(frames, total)
-	var tween = Tween(from)
-		.to(random(20))
-		.update(function(){
-			frames++
-			setImmediate(step)
-		})
+var from = new Array(20).join(1).split('').map(Number)
+var to = new Array(20).join(100 + ',').split(',').map(Number)
+
+console.log('Duration per tween: %dms', duration)
+console.log('Total tweens: %d', total)
+
+while (i++ < total) {
+	var tween = new Tween(from)
+		.to(to)
 		.duration(duration)
-		.on('end', next)
 
-	function step(){
-		tween.step()
+	while (!tween.done) {
+		tween.next()
+		frames++
 	}
-
-	step()
 }
 
-next()
-
-function log(frames, total){
-	console.log('Duration per tween: %dms', duration)
-	console.log('Total tweens: %d', total)
-	console.log('Average number of frames per tween: %d', frames / total)
-}
+console.log('Average number of frames per tween: %d', frames / total)
