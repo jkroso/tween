@@ -1,6 +1,7 @@
 
 var inherit = require('inherit')
-var Tween = require('./tween')
+  , Tween = require('./tween')
+  , now = require('now')
 
 module.exports = ArrayTween
 
@@ -28,4 +29,17 @@ ArrayTween.prototype.apply = function(p){
     curr[k] = from[k] + (to[k] - from[k]) * p
   }
   return curr
+}
+
+/**
+ * Reset the tween.
+ *
+ * @api public
+ */
+
+ArrayTween.prototype.reset = function(){
+  this._curr = this._from.slice()
+  this._start = now()
+  this.step = Tween.prototype.step
+  return this
 }

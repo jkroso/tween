@@ -1,11 +1,12 @@
 
 var inherit = require('inherit')
-var Tween = require('./tween')
+  , Tween = require('./tween')
+  , now = require('now')
 
 module.exports = ObjectTween
 
 function ObjectTween(obj){
-	this._from = obj
+  this._from = obj
 }
 
 inherit(ObjectTween, Tween)
@@ -27,4 +28,19 @@ ObjectTween.prototype.apply = function(p){
     curr[k] = from[k] + (to[k] - from[k]) * p
   }
   return curr
+}
+
+/**
+ * Reset the tween.
+ *
+ * @api public
+ */
+
+ObjectTween.prototype.reset = function(){
+  var from = this._from
+  var copy = this._curr = {}
+  for (var k in from) copy[k] = from[k]
+  this._start = now()
+  this.step = Tween.prototype.step
+  return this
 }
