@@ -20,5 +20,7 @@ var implementations = {
  */
 
 module.exports = function(x){
-  return new implementations[type(x)](x)
+	var Tween = implementations[type(x)]
+	if (!Tween) throw new TypeError('no implementation for ' +type(x))
+  return new Tween(x)
 }

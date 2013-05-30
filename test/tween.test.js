@@ -13,6 +13,12 @@ describe('tween', function () {
     tween([]).should.be.an.instanceOf(ArrayTween)
     tween(1).should.be.an.instanceOf(NumberTween)
   })
+
+  it('should error on an invalid type', function () {
+    (function(){
+      tween(true)
+    }).should.throw('no implementation for boolean')
+  })
 })
 
 describe('object', function(){

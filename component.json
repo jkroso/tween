@@ -21,6 +21,7 @@
     "index.js",
     "array.js",
     "tween.js",
+    "number.js",
     "object.js"
   ]
 }
