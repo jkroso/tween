@@ -1,11 +1,19 @@
 
 # tween
 
-  Motion tween component using [ease](https://github.com/component/ease).
+  A tween engine is a generator which produces intermediate values (frames) between two points. The frames it generates are based on two variables. The time elapsed since the tween was created and an [easing](//github.com/component/ease) function which hopefully adds an interesting shape to the series of frames. Tween engines can be used to create animations.
 
 ## Installation
 
-    $ component install component/tween
+_With [component](//github.com/component/component), [packin](//github.com/jkroso/packin) or [npm](//github.com/isaacs/npm)_  
+
+    $ {package mananger} install jkroso/now
+
+then in your app:
+
+```js
+var now = require('now')
+```
 
 ## Example
 
@@ -13,24 +21,18 @@
 var Tween = require('tween');
 var raf = require('raf');
 var button = document.querySelector('button');
+var style = button.style;
 
 var tween = Tween({ rotate: 0, opacity: 0 })
   .ease('out-bounce')
   .to({ rotate: 360, opacity: 1  })
   .duration(800);
 
-tween.update(function(o){
-  button.style.opacity = o.opacity;
-  button.style.webkitTransform = 'rotate(' + (o.rotate | 0) + 'deg)';
-});
-
-tween.on('end', function(){
-  animate = function(){};
-});
-
 function animate() {
-  raf(animate);
-  tween.update();
+  var frame = tween.next();
+  style.opacity = frame.opacity;
+  style.webkitTransform = 'rotate(' + frame.rotate + 'deg)';
+  if (!tween.done) raf(animate);
 }
 
 animate();
@@ -38,36 +40,53 @@ animate();
 
 ## API
 
-### Tween(obj:Object|Array)
+  - [Tween()](#tween)
+  - [Tween.reset()](#tweenreset)
+  - [Tween.to()](#tweentoobjobjectarray)
+  - [Tween.duration()](#tweendurationmsnumber)
+  - [Tween.ease()](#tweeneasefnstringfunction)
+  - [Tween.next()](#tweennext)
+  - [Tween.update()](#tweenupdatefnfunction)
+  - [Tween.frame()](#tweenframepercentnumber)
 
-  Initialize a new `Tween` with `obj`.
+### Tween(x:Object|Array|Number)
 
-### Tween#reset()
+  Initialize a new `Tween` with `x`.
+
+### Tween.reset()
 
   Reset the tween.
 
-### Tween#to(obj:Object|Array)
+### Tween.to(obj:Object|Array)
 
-  Tween to `obj` and reset internal state.
-  
-     tween.to({ x: 50, y: 100 })
+  set target value
 
-### Tween#duration(ms:Number)
+```js
+ tween.to({ x: 50, y: 100 })
+```
+
+### Tween.duration(ms:Number)
 
   Set duration to `ms` [500].
 
-### Tween#ease(fn:String|Function)
+### Tween.ease(fn:String|Function)
 
   Set easing function to `fn`.
-  
-     tween.ease('in-out-sine')
 
-### Tween#update(fn:Function)
+```js
+ tween.ease('in-out-sine')
+```
 
-  Set update function to `fn` or 
-  when no argument is given this performs
-  a "step".
+### Tween.next()
 
-## License
+  generate the next frame
 
-  MIT
+### Tween.update([fn]:Function)
+
+  Set update function to `fn` or when no
+  argument is given it performs a "step"
+
+### Tween.frame(percent:Number)
+
+  generate a tween frame at point `p` between
+  `this._from` and `this._to`

@@ -14,7 +14,7 @@ var implementations = {
 /**
  * Initialize a new `Tween` with `x`.
  *
- * @param {Object|Array} x
+ * @param {Object|Array|Number} x
  * @return {Tween}
  * @api public
  */
