@@ -20,7 +20,7 @@ inherit(ArrayTween, Tween)
  * @api private
  */
 
-ArrayTween.prototype.apply = function(p){
+ArrayTween.prototype.frame = function(p){
   var from = this._from
   var to = this._to
   var curr = this._curr
@@ -40,6 +40,6 @@ ArrayTween.prototype.apply = function(p){
 ArrayTween.prototype.reset = function(){
   this._curr = this._from.slice()
   this._start = now()
-  this.step = Tween.prototype.step
+  this.next = Tween.prototype.next
   return this
 }

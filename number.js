@@ -20,7 +20,7 @@ inherit(NumberTween, Tween)
  * @api public
  */
 
-NumberTween.prototype.apply = function(p){
+NumberTween.prototype.frame = function(p){
   return this._from + this._diff * p
 }
 
@@ -32,6 +32,6 @@ NumberTween.prototype.apply = function(p){
 NumberTween.prototype.reset = function(){
   this._start = now()
   this._diff = (this._to || 0) - this._from
-  this.step = Tween.prototype.step
+  this.next = Tween.prototype.next
   return this
 }

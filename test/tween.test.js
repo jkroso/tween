@@ -36,9 +36,9 @@ describe('object', function(){
     t.update(function(o){
       o.should.have.property('x').and.be.within(1, 10)
       tick(function(){
-        t.step()
+        t.update()
       })
-    }).step()
+    }).update()
   })
 })
 
@@ -57,9 +57,9 @@ describe('array', function(){
     t.update(function(o){
       o.should.have.property(0).and.be.within(1, 10)
       tick(function(){
-        t.step()
+        t.update()
       })
-    }).step()
+    }).update()
   })
 })
 
@@ -78,8 +78,8 @@ describe('number', function(){
     t.update(function(o){
       o.should.be.a('number').and.be.within(1, 10)
       tick(function(){
-        t.step()
+        t.update()
       })
-    }).step()
+    }).update()
   })
 })

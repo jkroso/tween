@@ -20,7 +20,7 @@ inherit(ObjectTween, Tween)
  * @api private
  */
 
-ObjectTween.prototype.apply = function(p){
+ObjectTween.prototype.frame = function(p){
   var from = this._from
   var to = this._to
   var curr = this._curr
@@ -41,6 +41,6 @@ ObjectTween.prototype.reset = function(){
   var copy = this._curr = {}
   for (var k in from) copy[k] = from[k]
   this._start = now()
-  this.step = Tween.prototype.step
+  this.next = Tween.prototype.next
   return this
 }

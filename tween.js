@@ -7,7 +7,6 @@ var Emitter = require('emitter')
   , ease = require('ease')
   , now = require('now')
   , clone = require('clone')
-  , noop = function(){}
 
 /**
  * Tweening base class
@@ -34,6 +33,7 @@ Emitter(Tween.prototype)
 
 Tween.prototype._ease = ease.linear
 Tween.prototype._duration = 500
+Tween.prototype.done = false
 
 /**
  * Reset the tween.
@@ -44,7 +44,7 @@ Tween.prototype._duration = 500
 Tween.prototype.reset = function(){
   this._curr = clone(this._from)
   this._start = now()
-  this.step = Tween.prototype.step
+  this.done = false
   return this
 }
 
@@ -54,7 +54,7 @@ Tween.prototype.reset = function(){
  *    tween.to({ x: 50, y: 100 })
  *
  * @param {Object|Array} obj
- * @return {Tween} self
+ * @return {this}
  * @api public
  */
 
@@ -83,7 +83,7 @@ Tween.prototype.duration = function(ms){
  *    tween.ease('in-out-sine')
  *
  * @param {String|Function} fn
- * @return {Tween}
+ * @return {this}
  * @api public
  */
 
@@ -95,41 +95,38 @@ Tween.prototype.ease = function(fn){
 }
 
 /**
- * Perform a step.
+ * generate the next frame
  *
- * @return {this}
- * @api private
+ * @return {x}
+ * @api public
  */
 
-Tween.prototype.step = function(){
+Tween.prototype.next = function(){
   var completion = (now() - this._start) / this._duration
 
   // complete
   if (completion >= 1) {
-    this._from = this._to
-    this._update(this._to)
-    this.step = noop
-    this.emit('end')
-    return this
+    this.done = true
+    return this._to
   }
 
-  this._update(this.apply(this._ease(completion)))
-
-  return this
+  return this.frame(this._ease(completion))
 }
 
 /**
- * Set update function to `fn` or
- * when no argument is given this performs
- * a "step".
+ * Set update function to `fn` or when no
+ * argument is given it performs a "step"
  *
- * @param {Function} fn
- * @return {Tween} self
+ * @param {Function} [fn]
+ * @return {this}
  * @api public
  */
 
 Tween.prototype.update = function(fn){
-  if (!fn) return this.step()
-  this._update = fn
+  if (fn) return this.on('update', fn)
+  if (!this.done) {
+    this.emit('update', this.next())
+    if (this.done) this.emit('end')
+  }
   return this
 }
