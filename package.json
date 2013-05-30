@@ -19,6 +19,9 @@
   },
   "devDependencies": {
     "sourcegraph": "~0.7.1",
-    "bigfile": "~0.5.2"
+    "bigfile": "~0.5.2",
+    "chai": "~1.6.0",
+    "mocha": "~1.10.0",
+    "next-tick": "http://github.com/timoxley/next-tick/tarball/0.0.1"
   }
 }
