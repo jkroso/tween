@@ -7,7 +7,8 @@ var type = require('type')
 
 var implementations = {
   object: require('./object'),
-  array: require('./array')
+  array: require('./array'),
+  number: require('./number')
 }
 
 /**
