@@ -31,7 +31,7 @@ NumberTween.prototype.apply = function(p){
 
 NumberTween.prototype.reset = function(){
   this._start = now()
-  this._diff = this._from - (this._to || 0)
+  this._diff = (this._to || 0) - this._from
   this.step = Tween.prototype.step
   return this
 }
