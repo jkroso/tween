@@ -7,12 +7,12 @@
 
 _With [component](//github.com/component/component), [packin](//github.com/jkroso/packin) or [npm](//github.com/isaacs/npm)_  
 
-    $ {package mananger} install jkroso/now
+    $ {package mananger} install jkroso/tween
 
 then in your app:
 
 ```js
-var now = require('now')
+var tween = require('tween')
 ```
 
 ## Example
@@ -46,6 +46,7 @@ animate();
   - [Tween.duration()](#tweendurationmsnumber)
   - [Tween.ease()](#tweeneasefnstringfunction)
   - [Tween.next()](#tweennext)
+  - [Tween.done](#tweendone)
   - [Tween.frame()](#tweenframepercentnumber)
 
 ### Tween(x:Object|Array|Number)
@@ -80,6 +81,10 @@ animate();
 ### Tween.next()
 
   generate the next frame
+
+### Tween.done
+
+  `false` until the last frame is generated
 
 ### Tween.frame(percent:Number)
 
