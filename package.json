@@ -9,7 +9,8 @@
   ],
   "dependencies": {
     "emitter-component": "*",
-    "ease-component": "*"
+    "ease-component": "*",
+    "serve": "http://github.com/jkroso/serve/tarball/1.2.1"
   },
   "license": "MIT",
   "component": {
@@ -18,10 +19,7 @@
     }
   },
   "devDependencies": {
-    "sourcegraph": "~0.7.1",
-    "bigfile": "~0.5.2",
     "chai": "~1.6.0",
-    "mocha": "~1.10.0",
-    "next-tick": "http://github.com/timoxley/next-tick/tarball/0.0.1"
+    "mocha": "~1.10.0"
   }
 }

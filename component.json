@@ -3,7 +3,11 @@
   "repo": "component/tween",
   "description": "Motion tween engine using 'ease'",
   "version": "0.2.0",
-  "keywords": ["tween", "tweening", "animation"],
+  "keywords": [
+    "tween",
+    "tweening",
+    "animation"
+  ],
   "dependencies": {
     "jkroso/emitter": "0.7.0",
     "jkroso/now": "0.1.1",
@@ -13,8 +17,9 @@
     "component/inherit": "0.0.2"
   },
   "development": {
-    "component/raf": "*",
-    "component/autoscale-canvas": "*"
+    "timoxley/next-tick": "0.0.1",
+    "chaijs/chai": "1.6.0",
+    "component/raf": "1.0.0"
   },
   "license": "MIT",
   "scripts": [

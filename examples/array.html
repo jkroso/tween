@@ -5,25 +5,23 @@
 	}
 </style>
 
-<script src="../build/build.js"></script>
-
 <canvas width=10000 height=500></canvas>
 
 <script>
-	var Tween = require('tween');
-	var raf = require('component-raf');
+	var Tween = require('..');
+	var raf = require('raf');
 	var canvas = document.querySelector('canvas');
 	var ctx = canvas.getContext('2d');
 	var h = 500;
 
-  function random(n, f) {
+	function random(n, f) {
 		var arr = [];
 		while (n--) arr.push(Math.random() * f);
 		return arr;
 	}
 
 	var tween = Tween(random(10000, 50))
-		.ease('out-bounce')
+		.ease('out-cube')
 		.to(random(10000, 400))
 		.duration(800);
 
