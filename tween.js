@@ -6,7 +6,6 @@
 var Emitter = require('emitter')
   , ease = require('ease')
   , now = require('now')
-  , clone = require('clone')
 
 /**
  * Tweening base class
@@ -42,7 +41,6 @@ Tween.prototype.done = false
  */
 
 Tween.prototype.reset = function(){
-  this._curr = clone(this._from)
   this._start = now()
   this.done = false
   return this
