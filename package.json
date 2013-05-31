@@ -8,7 +8,6 @@
     "animation"
   ],
   "dependencies": {
-    "emitter-component": "*",
     "ease-component": "*",
     "serve": "http://github.com/jkroso/serve/tarball/1.2.1"
   },

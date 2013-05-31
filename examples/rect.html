@@ -18,7 +18,8 @@
     .to({ border: 5, w: 150, h: 100, alpha: 1  })
     .duration(800);
 
-  tween.update(function(o){
+  function animate() {
+    var o = tween.next();
     canvas.width = canvas.width;
     ctx.strokeStyle = 'black';
     ctx.globalAlpha = o.alpha;
@@ -26,15 +27,7 @@
     ctx.rect(canvas.width / 2 - o.w / 2, canvas.height / 2 - o.h / 2, o.w, o.h);
     ctx.stroke();
     ctx.fill();
-  });
-
-  tween.on('end', function(){
-    animate = function(){};
-  });
-
-  function animate() {
-    raf(animate);
-    tween.update();
+    if (!tween.done) raf(animate);
   }
 
   animate();

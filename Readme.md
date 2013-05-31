@@ -46,7 +46,6 @@ animate();
   - [Tween.duration()](#tweendurationmsnumber)
   - [Tween.ease()](#tweeneasefnstringfunction)
   - [Tween.next()](#tweennext)
-  - [Tween.update()](#tweenupdatefnfunction)
   - [Tween.frame()](#tweenframepercentnumber)
 
 ### Tween(x:Object|Array|Number)
@@ -81,11 +80,6 @@ animate();
 ### Tween.next()
 
   generate the next frame
-
-### Tween.update([fn]:Function)
-
-  Set update function to `fn` or when no
-  argument is given it performs a "step"
 
 ### Tween.frame(percent:Number)
 

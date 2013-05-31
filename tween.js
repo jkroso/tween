@@ -3,8 +3,7 @@
  * Module dependencies.
  */
 
-var Emitter = require('emitter')
-  , ease = require('ease')
+var ease = require('ease')
   , now = require('now')
 
 /**
@@ -19,12 +18,6 @@ module.exports = Tween
 function Tween(obj) {
   this._from = obj
 }
-
-/**
- * Mixin emitter.
- */
-
-Emitter(Tween.prototype)
 
 /**
  * default settings
@@ -111,24 +104,6 @@ Tween.prototype.next = function(){
   }
 
   return this.frame(this._ease(completion))
-}
-
-/**
- * Set update function to `fn` or when no
- * argument is given it performs a "step"
- *
- * @param {Function} [fn]
- * @return {this}
- * @api public
- */
-
-Tween.prototype.update = function(fn){
-  if (fn) return this.on('update', fn)
-  if (!this.done) {
-    this.emit('update', this.next())
-    if (this.done) this.emit('end')
-  }
-  return this
 }
 
 /**

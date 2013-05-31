@@ -48,12 +48,15 @@ describe('object', function(){
         var o = t.next()
         o.should.have.property('x').and.be.within(1, 10)
       }
+
       o.should.eql({x:10})
       t.to({ x: 1}).duration(10)
+
       while (!t.done) {
         var o = t.next()
         o.should.have.property('x').and.be.within(1, 10)
       }
+
       o.should.eql({ x: 1 });
       (now() - start).should.be.within(15, 25)
     })
@@ -61,43 +64,37 @@ describe('object', function(){
 })
 
 describe('array', function(){
-  it('should work', function(done){
+  it('should work', function(){
     var start = now()
     var t = tween([1])
       .ease('linear')
       .to([ 10 ])
       .duration(10)
-      .on('end', function(){
-        (now() - start).should.be.within(10, 40)
-        done()
-      })
 
-    t.update(function(o){
+    while (!t.done) {
+      var o = t.next()
       o.should.have.property(0).and.be.within(1, 10)
-      tick(function(){
-        t.update()
-      })
-    }).update()
+    }
+
+    (now() - start).should.be.within(10, 15)
+    o.should.eql([ 10 ])
   })
 })
 
 describe('number', function(){
-  it('should work', function(done){
+  it('should work', function(){
     var start = now()
     var t = tween(1)
       .ease('linear')
       .to(10)
       .duration(10)
-      .on('end', function(){
-        (now() - start).should.be.within(10, 20)
-        done()
-      })
 
-    t.update(function(o){
+    while(!t.done) {
+      var o = t.next()
       o.should.be.a('number').and.be.within(1, 10)
-      tick(function(){
-        t.update()
-      })
-    }).update()
+    }
+
+    (now() - start).should.be.within(10, 15)
+    o.should.equal(10)
   })
 })
