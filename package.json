@@ -8,8 +8,7 @@
     "animation"
   ],
   "dependencies": {
-    "ease-component": "*",
-    "serve": "http://github.com/jkroso/serve/tarball/1.2.1"
+    "ease-component": "*"
   },
   "license": "MIT",
   "component": {

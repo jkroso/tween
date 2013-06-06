@@ -15,9 +15,11 @@
     "component/inherit": "0.0.2"
   },
   "development": {
-    "timoxley/next-tick": "0.0.1",
-    "chaijs/chai": "1.6.0",
-    "component/raf": "1.0.0"
+    "chaijs/chai": "1.6.1",
+    "jkroso/serve": "1.2.3",
+    "component/raf": "1.0.0",
+    "visionmedia/mocha": "1.9.0",
+    "timoxley/next-tick": "0.0.1"
   },
   "license": "MIT",
   "scripts": [
