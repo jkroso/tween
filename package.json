@@ -8,16 +8,10 @@
     "animation"
   ],
   "dependencies": {
-    "ease-component": "*"
+    "inherit": "http://github.com/nathan7/inherit/tarball/f1a75b4844",
+    "ease": "http://github.com/component/ease/tarball/1.0.0",
+    "type": "http://github.com/jkroso/type/tarball/1.0.1",
+    "now": "http://github.com/jkroso/now/tarball/0.1.1"
   },
-  "license": "MIT",
-  "component": {
-    "scripts": {
-      "tween/index.js": "index.js"
-    }
-  },
-  "devDependencies": {
-    "chai": "~1.6.0",
-    "mocha": "~1.10.0"
-  }
+  "license": "MIT"
 }
