@@ -95,26 +95,24 @@ Tween.prototype.ease = function(fn){
  */
 
 Tween.prototype.next = function(){
-  var completion = (now() - this._start) / this._duration
+  var progress = (now() - this._start) / this._duration
 
-  // complete
-  if (completion >= 1) {
+  if (progress >= 1) {
     this.done = true
     return this._to
   }
 
-  return this.frame(this._ease(completion))
+  return this.frame(this._ease(progress))
 }
 
 /**
  * generate a tween frame at point `p` between 
- * `this._from` and `this._to`
+ * `this._from` and `this._to`. To be defined in
+ * sub-classes
  * 
  * @param {Number} percent
  * @return {x}
  * @api public
  */
 
-Tween.prototype.frame = function(percent){
-  throw new Error('should be shadowed by a sub-class')
-}
+Tween.prototype.frame
