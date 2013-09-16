@@ -1,29 +1,29 @@
 
 <style>
-  body {
-    padding: 50px;
-  }
+	body {
+		padding: 50px;
+	}
 </style>
 
 <button>Button</button>
 
 <script>
-  var Tween = require('..');
-  var raf = require('raf');
-  var button = document.querySelector('button');
-  var style = button.style;
+	var Tween = require('..');
+	var raf = require('raf');
+	var button = document.querySelector('button');
+	var style = button.style;
 
-  var tween = Tween({ rotate: 0, opacity: 0 })
-    .ease('out-bounce')
-    .to({ rotate: 360, opacity: 1  })
-    .duration(800);
+	var tween = Tween({ rotate: 0, opacity: 0 })
+		.ease('out-bounce')
+		.to({ rotate: 360, opacity: 1  })
+		.duration(800);
 
-  function animate() {
-    var frame = tween.next();
-    style.opacity = frame.opacity;
-    style.webkitTransform = 'rotate(' + frame.rotate + 'deg)';
-    if (!tween.done) raf(animate);
-  }
+	function animate() {
+		var frame = tween.next();
+		style.opacity = frame.opacity;
+		style.webkitTransform = 'rotate(' + frame.rotate + 'deg)';
+		if (!tween.done) raf(animate);
+	}
 
-  animate();
+	animate();
 </script>

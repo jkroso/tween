@@ -1,54 +1,54 @@
 
 <style>
-  canvas {
-    border: 1px solid #eee;
-  }
+	canvas {
+		border: 1px solid #eee;
+	}
 </style>
 
 <canvas width=500 height=400></canvas>
 
 <script>
-  var Tween = require('..');
-  var raf = require('raf');
-  var canvas = document.querySelector('canvas');
-  var ctx = canvas.getContext('2d');
-  var w = canvas.width, h = canvas.height;
+	var Tween = require('..');
+	var raf = require('raf');
+	var canvas = document.querySelector('canvas');
+	var ctx = canvas.getContext('2d');
+	var w = canvas.width, h = canvas.height;
 
-  function Ball(x, y) {
-    this.moveTo(x, y);
-    this.rad = 10;
-  }
+	function Ball(x, y) {
+		this.moveTo(x, y);
+		this.rad = 10;
+	}
 
-  Ball.prototype.moveTo = function(x, y){
-    this.x = x;
-    this.y = y;
-  };
+	Ball.prototype.moveTo = function(x, y){
+		this.x = x;
+		this.y = y;
+	};
 
-  Ball.prototype.draw = function(ctx){
-    ctx.save();
-    ctx.fillStyle = 'red';
-    ctx.arc(this.x, this.y, this.rad, 0, Math.PI * 2, false);
-    ctx.fill();
-    ctx.restore();
-  };
+	Ball.prototype.draw = function(ctx){
+		ctx.save();
+		ctx.fillStyle = 'red';
+		ctx.arc(this.x, this.y, this.rad, 0, Math.PI * 2, false);
+		ctx.fill();
+		ctx.restore();
+	};
 
-  var ball = new Ball(100, 100);
-  ball.draw(ctx);
-  var tween = Tween({ x: ball.x, y: ball.y })
-    .ease('out-bounce')
-    .duration(1500);
+	var ball = new Ball(100, 100);
+	ball.draw(ctx);
+	var tween = Tween({ x: ball.x, y: ball.y })
+		.ease('out-bounce')
+		.duration(1500);
 
-  canvas.onclick = function(e){
-    console.log('move x:%d, y:%d', e.offsetX, e.offsetY);
-    tween.to({ x: e.offsetX, y: e.offsetY });
-    animate()
-  };
-  
-  function animate() {
-    var o = tween.next();
-    canvas.width = canvas.width;
-    ball.moveTo(o.x, o.y);
-    ball.draw(ctx);
-    if (!tween.done) raf(animate);
-  }
+	canvas.onclick = function(e){
+		console.log('move x:%d, y:%d', e.offsetX, e.offsetY);
+		tween.to({ x: e.offsetX, y: e.offsetY });
+		animate()
+	};
+	
+	function animate() {
+		var o = tween.next();
+		canvas.width = canvas.width;
+		ball.moveTo(o.x, o.y);
+		ball.draw(ctx);
+		if (!tween.done) raf(animate);
+	}
 </script>

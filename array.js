@@ -1,7 +1,7 @@
 
 var inherit = require('inherit')
-  , Tween = require('./tween')
-  , now = require('now')
+var Tween = require('./tween')
+var reset = Tween.prototype.reset
 
 module.exports = ArrayTween
 
@@ -9,22 +9,20 @@ function ArrayTween(array){
 	this._from = array
 }
 
-inherit(ArrayTween, Tween)
+Tween.extend(ArrayTween)
 
 ArrayTween.prototype.frame = function(p){
-  var from = this._from
-  var to = this._to
-  var curr = this._curr
-  var k = to.length
-  while (k--) {
-    curr[k] = from[k] + (to[k] - from[k]) * p
-  }
-  return curr
+	var from = this._from
+	var curr = this._curr
+	var to = this._to
+	var i = to.length
+	while (i--) {
+		curr[i] = from[i] + (to[i] - from[i]) * p
+	}
+	return curr
 }
 
 ArrayTween.prototype.reset = function(){
-  this._curr = this._from.slice()
-  this._start = now()
-  this.done = false
-  return this
+	this._curr = this._from.slice()
+	return reset.call(this)
 }

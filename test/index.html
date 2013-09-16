@@ -1,20 +1,12 @@
-<!doctype html>
-<html>
-<head>
-	<title>tween tests</title>
-	<link rel="stylesheet" href="../node_modules/mocha/mocha.css">
-</head>
-<body>
-	<div id="mocha"></div>
-	<script>
-		var mocha = require('mocha')
+<meta charset="utf-8">
+<title>tween tests</title>
+<link rel="stylesheet" href="../node_modules/mocha/mocha.css">
+<div id="mocha"></div>
+<script>
+	var mocha = require('mocha')
 
-		mocha.setup('bdd')
-		require('./tween.test.js')
+	mocha.setup('bdd')
+	require('./tween.test.js')
 
-		mocha.run(function () {
-			console.log('Done!')
-		})
-	</script>
-</body>
-</html>
+	mocha.run()
+</script>

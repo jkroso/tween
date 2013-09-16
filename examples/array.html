@@ -5,7 +5,7 @@
 	}
 </style>
 
-<canvas width=10000 height=500></canvas>
+<canvas width=1000 height=500></canvas>
 
 <script>
 	var Tween = require('..');
@@ -20,9 +20,9 @@
 		return arr;
 	}
 
-	var tween = Tween(random(10000, 50))
+	var tween = Tween(random(1000, 50))
 		.ease('out-cube')
-		.to(random(10000, 400))
+		.to(random(1000, 400))
 		.duration(800);
 
 	function animate() {
@@ -30,7 +30,7 @@
 		ctx.fillStyle = '#0070ff';
 		var a = tween.next();
 		for (var i = 0; i < a.length; i++) {
-		  ctx.fillRect(i, h - a[i], 1, a[i]);
+			ctx.fillRect(i, h - a[i], 1, a[i]);
 		}
 		if (!tween.done) raf(animate);
 	}

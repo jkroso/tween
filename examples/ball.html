@@ -1,60 +1,60 @@
 
 <style>
-  canvas {
-    border: 1px solid #eee;
-  }
+	canvas {
+		border: 1px solid #eee;
+	}
 </style>
 
 <canvas width=500 height=400></canvas>
 
 <script>
-  var Tween = require('..');
-  var raf = require('raf');
-  var canvas = document.querySelector('canvas');
-  var ctx = canvas.getContext('2d');
-  var w = canvas.width, h = canvas.height;
+	var Tween = require('..');
+	var raf = require('raf');
+	var canvas = document.querySelector('canvas');
+	var ctx = canvas.getContext('2d');
+	var w = canvas.width, h = canvas.height;
 
-  var tween = Tween({ x: w/2, y: 20, r: 10, a: .5 })
-    .ease('out-bounce')
-    .to({ x: w/2, y: h-8, r: 10, a: .5 })
-    .duration(2000);
+	var tween = Tween({ x: w/2, y: 20, r: 10, a: .5 })
+		.ease('out-bounce')
+		.to({ x: w/2, y: h-8, r: 10, a: .5 })
+		.duration(2000);
 
-  var n = 0;
-  function change(){
-    switch (n++) {
-      case 0:
-        tween
-          .to({ x: w/2, y: 20, r: 10, a: .5 })
-          .ease('out-sine')
-          .duration(500);
-        break;
-      case 1:
-        tween
-          .to({ x: w/2, y: h/2, r: 10, a: .5 })
-            .ease('in-out-back')
-            .duration(800);
-        break;
-      case 2:
-        tween
-          .to({ x: w/2, y: h/2, r: 80, a: 1 })
-          .ease('out-bounce')
-          .duration(1500);
-        break;
-      default:
-        animate = function(){};
-    }
-  }
+	var n = 0;
+	function change(){
+		switch (n++) {
+			case 0:
+				tween
+					.to({ x: w/2, y: 20, r: 10, a: .5 })
+					.ease('out-sine')
+					.duration(500);
+				break;
+			case 1:
+				tween
+					.to({ x: w/2, y: h/2, r: 10, a: .5 })
+						.ease('in-out-back')
+						.duration(800);
+				break;
+			case 2:
+				tween
+					.to({ x: w/2, y: h/2, r: 80, a: 1 })
+					.ease('out-bounce')
+					.duration(1500);
+				break;
+			default:
+				animate = function(){};
+		}
+	}
 
-  function animate() {
-    var o = tween.next();
-    canvas.width = canvas.width;
-    ctx.fillStyle = 'red';
-    ctx.globalAlpha = o.a;
-    ctx.arc(o.x | 0, o.y | 0, o.r, 0, Math.PI * 2, false);
-    ctx.fill();
-    if (tween.done) change()
-    raf(animate);
-  }
+	function animate() {
+		var o = tween.next();
+		canvas.width = canvas.width;
+		ctx.fillStyle = 'red';
+		ctx.globalAlpha = o.a;
+		ctx.arc(o.x | 0, o.y | 0, o.r, 0, Math.PI * 2, false);
+		ctx.fill();
+		if (tween.done) change()
+		raf(animate);
+	}
 
-  animate();
+	animate();
 </script>

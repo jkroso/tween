@@ -1,14 +1,10 @@
 
-/**
- * Module dependencies.
- */
-
 var type = require('type')
 
-var implementations = {
-  object: require('./object'),
-  array: require('./array'),
-  number: require('./number')
+var types = {
+	number: require('./number'),
+	object: require('./object'),
+	array: require('./array'),
 }
 
 /**
@@ -20,7 +16,7 @@ var implementations = {
  */
 
 module.exports = function(x){
-	var Tween = implementations[type(x)]
-	if (!Tween) throw new TypeError('no implementation for ' +type(x))
-  return new Tween(x)
+	var Tween = types[type(x)]
+	if (!Tween) throw new TypeError('unknown: ' + type(x))
+	return new Tween(x)
 }

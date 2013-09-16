@@ -1,7 +1,7 @@
 {
-  "name": "tween-component",
+  "name": "tween",
   "description": "Motion tween engine using 'ease'",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "keywords": [
     "tween",
     "tweening",
@@ -10,7 +10,7 @@
   "dependencies": {
     "inherit": "http://github.com/nathan7/inherit/tarball/f1a75b4844",
     "ease": "http://github.com/component/ease/tarball/1.0.0",
-    "type": "http://github.com/jkroso/type/tarball/1.0.1",
+    "type": "http://github.com/jkroso/type/tarball/1.0.2",
     "now": "http://github.com/jkroso/now/tarball/0.1.1"
   },
   "license": "MIT"

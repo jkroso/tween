@@ -1,10 +1,7 @@
 
-/**
- * Module dependencies.
- */
-
+var extensible = require('extensible')
 var ease = require('ease')
-  , now = require('now')
+var now = require('now')
 
 /**
  * Tweening base class
@@ -16,8 +13,14 @@ var ease = require('ease')
 module.exports = Tween
 
 function Tween(obj) {
-  this._from = obj
+	this._from = obj
 }
+
+/**
+ * add extend method
+ */
+
+extensible(Tween)
 
 /**
  * default settings
@@ -34,9 +37,9 @@ Tween.prototype.done = false
  */
 
 Tween.prototype.reset = function(){
-  this._start = now()
-  this.done = false
-  return this
+	this._start = now()
+	this.done = false
+	return this
 }
 
 /**
@@ -51,10 +54,10 @@ Tween.prototype.reset = function(){
  */
 
 Tween.prototype.to = function(obj){
-  if ('_to' in this) this._from = this._curr || this.next()
-  this._to = obj
-  this.reset()
-  return this
+	if ('_to' in this) this._from = this._curr || this.next()
+	this._to = obj
+	this.reset()
+	return this
 }
 
 /**
@@ -66,8 +69,8 @@ Tween.prototype.to = function(obj){
  */
 
 Tween.prototype.duration = function(ms){
-  this._duration = ms
-  return this
+	this._duration = ms
+	return this
 }
 
 /**
@@ -81,10 +84,10 @@ Tween.prototype.duration = function(ms){
  */
 
 Tween.prototype.ease = function(fn){
-  fn = typeof fn == 'function' ? fn : ease[fn]
-  if (!fn) throw new TypeError('invalid easing function')
-  this._ease = fn
-  return this
+	fn = typeof fn == 'function' ? fn : ease[fn]
+	if (!fn) throw new TypeError('invalid easing function')
+	this._ease = fn
+	return this
 }
 
 /**
@@ -95,21 +98,21 @@ Tween.prototype.ease = function(fn){
  */
 
 Tween.prototype.next = function(){
-  var progress = (now() - this._start) / this._duration
+	var progress = (now() - this._start) / this._duration
 
-  if (progress >= 1) {
-    this.done = true
-    return this._to
-  }
+	if (progress >= 1) {
+		this.done = true
+		return this._to
+	}
 
-  return this.frame(this._ease(progress))
+	return this.frame(this._ease(progress))
 }
 
 /**
- * generate a tween frame at point `p` between 
+ * generate a tween frame at point `p` between
  * `this._from` and `this._to`. To be defined in
  * sub-classes
- * 
+ *
  * @param {Number} percent
  * @return {x}
  * @api public
