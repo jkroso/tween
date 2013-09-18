@@ -24,8 +24,8 @@ var button = document.querySelector('button');
 var style = button.style;
 
 var tween = Tween({ rotate: 0, opacity: 0 })
-  .ease('out-bounce')
   .to({ rotate: 360, opacity: 1  })
+  .ease('out-bounce')
   .duration(800);
 
 function animate() {
@@ -40,53 +40,57 @@ animate();
 
 ## API
 
-  - [Tween()](#tween)
-  - [Tween.reset()](#tweenreset)
-  - [Tween.to()](#tweentoobjobjectarray)
-  - [Tween.duration()](#tweendurationmsnumber)
-  - [Tween.ease()](#tweeneasefnstringfunction)
-  - [Tween.next()](#tweennext)
-  - [Tween.done](#tweendone)
-  - [Tween.frame()](#tweenframepercentnumber)
+### Tween(from, to)
 
-### Tween(x:Object|Array|Number)
+  Tweening base class
 
-  Initialize a new `Tween` with `x`.
+### Tween#reset()
 
-### Tween.reset()
-
-  Reset the tween.
-
-### Tween.to(obj:Object|Array)
-
-  set target value. if `.to()` has been called before
-  `_from` will be updated to the current frame
+  Reset the tweens timer and state. Call this before
+  calling `.next()` for the first time.
 
 ```js
- tween.to({ x: 50, y: 100 })
+this.reset()
+while (!this.done) this.next()
 ```
 
-### Tween.duration(ms:Number)
+### Tween#to(val)
+
+  retarget the tween towards `val`. `this.from`
+  will be set to the tweens current value unless
+  `this._to` is currently `null`. Calls `reset()`
+  internally
+
+```js
+tween.to({ x: 50, y: 100 })
+```
+
+### Tween#from(val)
+
+  set the base value to `val`
+
+### Tween#duration(ms)
 
   Set duration to `ms` [500].
 
-### Tween.ease(fn:String|Function)
+### Tween#ease(fn:String|Function)
 
   Set easing function to `fn`.
 
 ```js
- tween.ease('in-out-sine')
+tween.ease('in-out-sine')
 ```
 
-### Tween.next()
+### Tween#next()
 
   generate the next frame
 
-### Tween.done
-
-  `false` until the last frame is generated
-
-### Tween.frame(percent:Number)
+### Tween#frame(percent)
 
   generate a tween frame at point `p` between
-  `this._from` and `this._to`
+  `this._from` and `this._to`. To be defined in
+  sub-classes
+
+```js
+tween(1, 3).frame(.5) // => 2
+```

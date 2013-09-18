@@ -1,12 +1,12 @@
 
-var inherit = require('inherit')
 var Tween = require('./tween')
-var reset = Tween.prototype.reset
 
 module.exports = ArrayTween
 
-function ArrayTween(array){
-	this._from = array
+function ArrayTween(from, to){
+	this._from = from
+	this._curr = from.slice()
+	this._to = to
 }
 
 Tween.extend(ArrayTween)
@@ -23,6 +23,7 @@ ArrayTween.prototype.frame = function(p){
 }
 
 ArrayTween.prototype.reset = function(){
-	this._curr = this._from.slice()
-	return reset.call(this)
+	Tween.prototype.reset.call(this)
+	this._curr = [] // prevent mutation
+	return this
 }

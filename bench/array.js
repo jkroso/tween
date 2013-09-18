@@ -14,8 +14,8 @@ console.log('Total tweens: %d', total)
 
 while (i++ < total) {
 	var tween = new Tween(from)
-		.to(to)
 		.duration(duration)
+		.to(to)
 
 	while (!tween.done) {
 		tween.next()

@@ -10,13 +10,14 @@ var types = {
 /**
  * Initialize a new `Tween` with `x`.
  *
- * @param {Object|Array|Number} x
+ * @param {Object|Array|Number} from
+ * @param {Object|Array|Number} to
  * @return {Tween}
  * @api public
  */
 
-module.exports = function(x){
-	var Tween = types[type(x)]
-	if (!Tween) throw new TypeError('unknown: ' + type(x))
-	return new Tween(x)
+module.exports = function(from, to){
+	var Tween = types[type(from)]
+	if (Tween) return new Tween(from, to)
+	throw new TypeError('unknown: ' + type(from))
 }

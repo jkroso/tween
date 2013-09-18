@@ -1,6 +1,6 @@
 {
   "name": "tween",
-  "repo": "component/tween",
+  "repo": "jkroso/tween",
   "description": "Motion tween engine using 'ease'",
   "keywords": [
     "tween",
@@ -10,7 +10,6 @@
   "dependencies": {
     "yields/extensible": "0.1.0",
     "component/ease": "1.0.0",
-    "yields/merge": "1.0.0",
     "jkroso/type": "1.0.2",
     "jkroso/now": "0.1.1"
   },

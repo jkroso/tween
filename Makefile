@@ -17,4 +17,7 @@ node_modules: component.json package.json
 		--executables \
 		--no-retrace
 
-.PHONY: serve test
+bench: node_modules
+	@node bench/array.js
+
+.PHONY: serve test bench

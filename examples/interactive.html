@@ -8,47 +8,47 @@
 <canvas width=500 height=400></canvas>
 
 <script>
-	var Tween = require('..');
-	var raf = require('raf');
-	var canvas = document.querySelector('canvas');
-	var ctx = canvas.getContext('2d');
-	var w = canvas.width, h = canvas.height;
+	var Tween = require('..')
+	var raf = require('raf')
+	var canvas = document.querySelector('canvas')
+	var ctx = canvas.getContext('2d')
+	var w = canvas.width, h = canvas.height
 
 	function Ball(x, y) {
-		this.moveTo(x, y);
-		this.rad = 10;
+		this.moveTo(x, y)
+		this.rad = 10
 	}
 
 	Ball.prototype.moveTo = function(x, y){
-		this.x = x;
-		this.y = y;
-	};
+		this.x = x
+		this.y = y
+	}
 
 	Ball.prototype.draw = function(ctx){
-		ctx.save();
-		ctx.fillStyle = 'red';
-		ctx.arc(this.x, this.y, this.rad, 0, Math.PI * 2, false);
-		ctx.fill();
-		ctx.restore();
-	};
+		ctx.save()
+		ctx.fillStyle = 'red'
+		ctx.arc(this.x, this.y, this.rad, 0, Math.PI * 2, false)
+		ctx.fill()
+		ctx.restore()
+	}
 
-	var ball = new Ball(100, 100);
-	ball.draw(ctx);
+	var ball = new Ball(100, 100)
+	ball.draw(ctx)
 	var tween = Tween({ x: ball.x, y: ball.y })
 		.ease('out-bounce')
-		.duration(1500);
+		.duration(1000)
 
 	canvas.onclick = function(e){
-		console.log('move x:%d, y:%d', e.offsetX, e.offsetY);
-		tween.to({ x: e.offsetX, y: e.offsetY });
-		animate()
-	};
+		console.log('move x:%d, y:%d', e.offsetX, e.offsetY)
+		tween.to({ x: e.offsetX, y: e.offsetY })
+		loop()
+	}
 	
-	function animate() {
-		var o = tween.next();
-		canvas.width = canvas.width;
-		ball.moveTo(o.x, o.y);
-		ball.draw(ctx);
-		if (!tween.done) raf(animate);
+	function loop() {
+		canvas.width = canvas.width
+		var frame = tween.next()
+		ball.moveTo(frame.x, frame.y)
+		ball.draw(ctx)
+		if (!tween.done) raf(loop)
 	}
 </script>
